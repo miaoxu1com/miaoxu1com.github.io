@@ -1,0 +1,606 @@
+<html><head>
+  <title>Evernote Export</title>
+  <basefont face="微软雅黑" size="2">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="exporter-version" content="Evernote Windows/308292 (zh-CN, DDL); Windows/10.0.0 (Win64);">
+  <style>
+    body, td {
+      font-family: 微软雅黑;
+      font-size: 10pt;
+    }
+  </style>
+</head>
+<body>
+<a name="568">
+
+</a><div><a name="568"><span>
+  </span></a><div><a name="568">
+<div><br></div></a><div style="font-size: 16px; display:block; min-width: 100%; position: relative;"><a name="568"> </a><div style="box-sizing:border-box;font-family:sans-serif;text-size-adjust:100%;font-size:10px;-webkit-tap-highlight-color:transparent;"><a name="568"></a><div style="box-sizing:border-box;line-height:1.42857;background-color:rgb(255, 255, 255);min-width:768px;color:rgb(51, 51, 51);font-size:17px;font-family:-apple-system, &quot;SF UI Text&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif;" lang="zh-CN"><a name="568">
+    
+
+
+    
+</a><div style="box-sizing:border-box;position:relative;padding-top:10px;"><a name="568">
+  
+  </a><div style="box-sizing:border-box;margin:0px auto;padding-top:20px;padding-bottom:40px;width:620px;"><a name="568">
+    </a><div style="box-sizing:border-box;"><a name="568">
+        <h1 style="box-sizing:border-box;color:inherit;font-size:34px;margin:20px 0px 0px;font-family:-apple-system, &quot;SF UI Display&quot;, Arial, &quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif;font-weight:700;line-height:1.3;word-break:break-word;">Github和GitBook使用</h1>
+
+        
+        </a>
+
+
+        
+        <div style="box-sizing:border-box;color:rgb(47, 47, 47);font-size:16px;font-weight:400;line-height:1.7;word-break:break-word;">
+          <div style="box-sizing:border-box;">
+            <h1 style="box-sizing:border-box;font-family:inherit;text-rendering:optimizelegibility;font-size:26px;margin:0px 0px 15px;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);">1. GitHub</h1>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">1.1. 创建账户</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;"><a href="https://github.com/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">https://github.com/</a>  在上面注册账户: gitexample</p>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">1.2. 生成本地公钥/私钥对</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">在本地Ubuntu上，ssh-keygen命令创建公钥/私钥对：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ ssh-keygen
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">然后根据提示在用户主目录下的.ssh目录中创建默认的公钥/私钥对文件，其中<sub style="box-sizing:border-box;font-size:75%;line-height:0;position:relative;vertical-align:baseline;bottom:-0.25em;">/.ssh/id_rsa是私钥文件，</sub>/.ssh/id_rsa.pub是公钥文件。注意私钥文件要严加保护，不能泄露给任何人。如果在执行ssh-keygen命令时选择了使用口令保护私钥，私钥文件是经过加密的。至于公钥文件~/.ssh/id_rsa.pub则可以放心地公开给他人。<br style="box-sizing:border-box;">
+也可以用ssh-keygen命令以不同的名称创建多个公钥，当拥有多个GitHub账号时，非常重要。这是因为虽然一个GitHub账号允许使用多个不
+同的SSH公钥，但反过来，一个SSH公钥只能对应于一个GitHub账号。下面的命令在~/.ssh目录下创建名为gitexample的私钥和名为
+gitexample.pub的公钥文件。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ ssh-keygen -C <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"gitexample@gmail.com"</span> -f ~<span style="box-sizing:border-box;color:rgb(152, 195, 121);">/.ssh/gitexample</span>
+
+$ ls ~<span style="box-sizing:border-box;color:rgb(152, 195, 121);">/.ssh/</span>
+gitexample  gitexample.pub
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">当生成的公钥/私钥对不在缺省位置（~/.ssh/id_rsa等）时，使用ssh命令连接远程主机时需要使用参数-i &lt;filename&gt;指定公钥/私钥对。或者在配置文件<sub style="box-sizing:border-box;font-size:75%;line-height:0;position:relative;vertical-align:baseline;bottom:-0.25em;">/.ssh/config中针对相应主机进行设定。例如对于上例创建了非缺省公钥/私钥对</sub>/.ssh/gitexample，可以在~/.ssh/config配置文件中写入如下配置。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">Host github.com
+    User git 
+    Hostname github.com
+    PreferredAuthentications publickey
+    IdentityFile ~<span style="box-sizing:border-box;color:rgb(152, 195, 121);">/.ssh/gi</span>texample               
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">好了，有了上面的准备，就将~/.ssh/gitexample.pub文件内容拷贝到剪切板。然后将公钥文件中的内容粘贴到GitHub的SSH公钥管理的对话框中。<br style="box-sizing:border-box;">
+设置成功后，再用ssh命令访问GitHub，会显示一条认证成功信息并退出。在认证成功的信息中还会显示该公钥对应的用户名。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ ssh -T git@github.com
+Hi gitexample! You have successfully authenticated, but GitHub does <span style="box-sizing:border-box;color:rgb(198, 120, 221);">not</span> provide shell access.
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">1.3. 项目托管</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">本章介绍如何在GitHub上创建一个新项目，包括创建版本库及为项目设计主页等。</p>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.1. 创建新项目</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">Your repositories --&gt; Create a new repository  --&gt; set Repository name --&gt; Create Reopsitory Button</p>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.2. 版本库初始化</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">如果是从头创建版本库，可以采用先克隆，建立提交数据，最后再通过推送完成GitHub版本库的初始化。步骤如下：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git <span style="box-sizing:border-box;color:rgb(230, 192, 123);">clone</span> git@github.com:gitexample/helloworld.git helloworld
+Cloning into <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'helloworld'</span>...
+Warning: Permanently added the RSA host key <span style="box-sizing:border-box;color:rgb(198, 120, 221);">for</span> IP address <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'13.250.177.223'</span> to the list of known hosts.
+remote: Counting objects: 3, <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Checking connectivity... <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.3. 创建并修改文件README.md</h3>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">My first GitHub project
+This <span style="box-sizing:border-box;color:rgb(198, 120, 221);">is</span> a example repository.
+
+Support markdown syntax format.
+
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.4. 添加README.md文件并提交。</h3>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git add README.md
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"README for this project."</span>
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.5. 向GitHub推送，完成版本库初始化。</h3>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push origin master
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.3.6. 从已有版本库创建</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">如果在GitHub项目初始化之前，数据已经存在于本地版本库中，显然像上面那样先克隆、再提交、后推送的方法就不适宜了。应该采用下面的方法。<br style="box-sizing:border-box;">
+为试验新的版本库初始化方法，先把刚刚新建的测试项目“helloworld”删除，同时也将本地工作区中克隆的“helloworld”删除。警告：删除项目的操作非常危险，不可恢复，慎用。<br style="box-sizing:border-box;">
+点击项目首页中"Settings"选项卡，在"Danger Zone"区域有"Delete this repository"<br style="box-sizing:border-box;">
+然后再重建版本库“helloworld”，见3.1节。<br style="box-sizing:border-box;">
+本地建立一个Git版本库。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ mkdir helloworld
+$ cd helloworld
+$ git init
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">然后在版本库中添加示例文件，如README.md文件，内容同前。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git add README.md
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"README for this project."</span>
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">为版本库添加名为origin的远程版本库。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git remote add origin git@github.<span style="box-sizing:border-box;color:rgb(97, 174, 238);">com:</span>gitexample/helloworld.git
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">执行推送命令，完成GitHub版本库的初始化。注意命令行中的-u参数，在推送成功后自动建立本地分支与远程版本库分支的追踪。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push -u origin master
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">1.4. 操作版本库</h2>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.4.1. 强制推送</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">上文提交时，提交用户设置的邮件地址并非gitexample用户设置的邮件地址。补救办法就是对此提交进行修改，然后强制推送到GitHub。<br style="box-sizing:border-box;">
+重新设置core.editor，user.name和user.email配置变量。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git config --global core.editor vim
+$ git config user.name <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"gitexample"</span>
+$ git config user.email <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"gitexample@gmail.com"</span>
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">执行Git修补提交命令。<br style="box-sizing:border-box;">
+注意使用参数--reset-author会将提交信息中的属性Author连同AuthorDate一并修改，否则只修改Commit和CommitDate。参数-C HEAD维持提交说明不变。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git commit --amend --reset-author -C HEAD
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">查看提交日志，发现提交者信息和作者信息都已经更改。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git log --pretty=fuller
+commit <span style="box-sizing:border-box;color:rgb(209, 154, 102);">959</span>af4fe61bbdc984dcc26acd139ea3e164096f4
+Author:     gitexample &lt;gitexample<span style="box-sizing:border-box;color:rgb(97, 174, 238);">@gmail</span>.com&gt;
+AuthorDate: Tue Sep <span style="box-sizing:border-box;color:rgb(209, 154, 102);">4</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">15</span>:<span style="box-sizing:border-box;color:rgb(209, 154, 102);">58</span>:<span style="box-sizing:border-box;color:rgb(209, 154, 102);">25</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">2018</span> +<span style="box-sizing:border-box;color:rgb(209, 154, 102);">0800</span>
+Commit:     gitexample &lt;gitexample<span style="box-sizing:border-box;color:rgb(97, 174, 238);">@gmail</span>.com&gt;
+CommitDate: Tue Sep <span style="box-sizing:border-box;color:rgb(209, 154, 102);">4</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">15</span>:<span style="box-sizing:border-box;color:rgb(209, 154, 102);">58</span>:<span style="box-sizing:border-box;color:rgb(209, 154, 102);">25</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">2018</span> +<span style="box-sizing:border-box;color:rgb(209, 154, 102);">0800</span>
+
+    README <span style="box-sizing:border-box;color:rgb(198, 120, 221);">for</span> <span style="box-sizing:border-box;color:rgb(198, 120, 221);">this</span> project.
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">使用强制推送。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push -f origin master
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.4.2. 新建分支</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">Git的分支就是保存在.git/refs/heads/命名空间下的引用。引用文件的内容是该分支对应的提交ID。当前版本库中的默认分支master就对应于文件.git/refs/heads/master。<br style="box-sizing:border-box;">
+若在GitHub版本库中创建分支，首先要在本地版本库中创建新的分支（即引用），然后用推送命令将本地创建的新的引用连同所指向的提交推送到GitHub版本库中完成GitHub上分支的创建。操作如下：<br style="box-sizing:border-box;">
+本地版本库中建立新分支mybranch1。<br style="box-sizing:border-box;">
+创建分支有多种方法，如使用git branch命令，但最为便捷的就是git checkout -b命令，同时完成新分支的创建和分支切换。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git checkout -b mybranch1
+Switched to a <span style="box-sizing:border-box;color:rgb(198, 120, 221);">new</span> branch <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'mybranch1'</span>
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">为了易于识别，添加一个新文件hello1，并提交。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ touch hello1
+$ echo <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"How are you!"</span> &gt; hello1 
+$ git add hello1 
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"add hello1."</span>
+[mybranch1 f65bdb4] add hello1.
+ <span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span> file changed, <span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span> insertion(+)
+ create mode <span style="box-sizing:border-box;color:rgb(209, 154, 102);">100644</span> hello1
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">通过推送命令，将本地分支mybranch1推送到GitHub远程版本库，完成在GitHub上的新分支创建。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push -u origin mybranch1
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">在GitHub上查看版本库，会看到新增了一个分支mybranch1，不过默认分支仍为master。</p>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.4.3. 设置默认分支</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">在"Settings"选项卡可以设置Default branch。<br style="box-sizing:border-box;">
+修改了GitHub默认分支后，如果再从GitHub克隆版本库，本地克隆后版本库的默认分支也将改变。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git <span style="box-sizing:border-box;color:rgb(230, 192, 123);">clone</span> git@github.com:gitexample/helloworld.git helloworld-branch1
+Cloning into <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'helloworld-branch1'</span>...
+remote: Counting objects: 6, <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+remote: Compressing objects: 100% (4/4), <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+remote: Total 6 (delta 0), reused 6 (delta 0), pack-reused 0
+Receiving objects: 100% (6/6), <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Checking connectivity... <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+$ <span style="box-sizing:border-box;color:rgb(230, 192, 123);">cd</span> helloworld-branch1/
+$ git branch
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">实际上修改GitHub上版本库的默认分支，就是将GitHub版本库的头指针HEAD指向了其他分支，如mybranch1分支。这可以从下面命令看出。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cd helloworld-branch1/
+$ git branch -r
+  origin/HEAD -&gt; origin/mybranch1
+  origin/master
+  origin/mybranch1
+$ cd helloworld-master/
+$ git branch -r
+  origin/HEAD -&gt; origin/master
+  origin/master
+  origin/mybranch1
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.4.4. 删除分支</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">不能删除当前工作分支。因此先切换到其他分支，例如从GitHub版本库中取出master分支并切换。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cd helloworld-branch1/
+$ git branch
+  master
+* mybranch1
+$ git checkout master
+Switched to branch <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'master'</span>
+Your branch is up-to-date with <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'origin/master'</span>.
+$ git branch
+* master
+  mybranch1
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">现在可以删除mybanch1分支。下面的命令之所以使用-D参数，而非-d参数，是因为Git在删除分支时为避免数据丢失，默认禁止删除尚未合并的分支。参数-D则可强制删除尚未合并的分支。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git branch -D mybranch1
+Deleted branch mybranch1 (was f46a284).
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">现
+在只是本地分支被删除了，远程GitHub服务器上的mybranch1分支尚在。删除远程GitHub版本库中的分支就不能使用git 
+branch命令，而是要使用git 
+push命令，而且要先在GitHub上把默认分支切换到mater。在使用推送分支命令时要使用一个特殊的引用表达式（冒号前为空）。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push origin <span style="box-sizing:border-box;color:rgb(97, 174, 238);">:mybranch1</span>
+</code></pre>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.4.5. 里程碑管理</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">里程碑即tag，其管理和分支管理非常类似。里程碑和分支一样也是以引用的形式存在的，保存在.git/refs/tags/路径下。引用可能指向一个提交，但也可能是其他类型（Tag对象）。</p>
+<ol style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">轻量级里程碑：用git tag &lt;tagname&gt; [&lt;commit&gt;] 命令创建，引用直接指向一个提交对象&lt;commit&gt;。</li>
+<li style="box-sizing:border-box;line-height:30px;">带说明的里程碑：用git tag -a 
+&lt;tagname&gt; [&lt;commit&gt;] 
+命令创建，并且在创建时需要提供创建里程碑的说明。Git会创建一个tag对象保存里程碑说明、里程碑的指向、创建里程碑的用户等信息，里程碑引用指向该
+Tag对象。</li>
+<li style="box-sizing:border-box;line-height:30px;">带签名的里程碑：用git tag -s &lt;tagname&gt; [&lt;commit&gt;] 命令创建。是在带说明的里程碑的基础上引入了PGP签名，保证了所创建的里程碑的完整性和不可拒绝性。</li>
+</ol>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">下面演示一下里程碑的创建和管理。</p>
+<ol style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">先在本地创建一个新提交。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ touch hello1
+$ git add hello1
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"add hello1 for mark."</span>
+</code></pre>
+<ol start="2" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">本地创建里程碑mytag1、mytag2和mytag3。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git tag -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"Tag on initial commit"</span> mytag1 HEAD^
+$ git tag -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"Tag on new commit"</span>     mytag2
+$ git tag mytag3
+</code></pre>
+<ol start="3" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">查看新建立的里程碑。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git tag -l -n1
+mytag1          Tag on initial commit
+mytag2          Tag on <span style="box-sizing:border-box;color:rgb(198, 120, 221);">new</span> commit
+mytag3          add hello1 <span style="box-sizing:border-box;color:rgb(198, 120, 221);">for</span> mark.
+</code></pre>
+<ol start="4" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">将本地里程碑推送到GitHub远程版本库。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push origin refs/tags/*
+Counting objects: 6, <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (4/4), <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Writing objects: 100% (5/5), 548 bytes, <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Total 5 (delta 0), reused 0 (delta 0)
+To git@github.com:gotgithub/helloworld.git
+ * [new tag]         mytag1 -&gt; mytag1
+ * [new tag]         mytag2 -&gt; mytag2
+ * [new tag]         mytag3 -&gt; mytag3
+</code></pre>
+<ol start="5" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">删除本地里程碑。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git tag -d mytag3
+Deleted tag <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'mytag3'</span> (was c71231c)
+</code></pre>
+<ol start="6" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">删除GitHub远程版本库中的里程碑。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push origin <span style="box-sizing:border-box;color:rgb(97, 174, 238);">:mytag3</span>
+To git@github.<span style="box-sizing:border-box;color:rgb(97, 174, 238);">com:</span>gotgithub/helloworld.git
+  [deleted]         mytag3
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">另外，版本库还可以与一些扩展应用建立联系，比如跟Email 和Redmine整合，Email可以实现新提交推送至版本库时，发送通知邮件。Redmine可以和多种版本库（包括Git）整合，可以直接通过Web界面浏览Git提交，还实现了提交和问题的关联。</p>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">1.5. 建立主页</h2>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.5.1. 创建个人主页</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">GitHub
+ 
+为每一个用户分配了一个二级域名&lt;user-id&gt;.github.io，用户为自己的二级域名创建主页很容易，只要在托管空间下创建一个名
+为&lt;user-id&gt;.github.io的版本库，向其master分支提交网站静态页面即可，其中网站首页为index.html。下面
+以gitexample用户为例介绍如何创建个人主页。</p>
+<ol style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">用户gitexample创建一个名为gitexample.github.io的Git版本库。</li>
+<li style="box-sizing:border-box;line-height:30px;">在本地克隆新建立的版本库。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git <span style="box-sizing:border-box;color:rgb(230, 192, 123);">clone</span> git@github.com:gitexample/gitexample.github.io.git gitexample.github.io
+Cloning into <span style="box-sizing:border-box;color:rgb(152, 195, 121);">'gitexample.github.io'</span>...
+remote: Counting objects: 3, <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (3/3), <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+Checking connectivity... <span style="box-sizing:border-box;color:rgb(198, 120, 221);">done</span>.
+$ <span style="box-sizing:border-box;color:rgb(230, 192, 123);">cd</span> gitexample.github.io/
+</code></pre>
+<ol start="3" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">在版本库根目录中创建文件index.html作为首页。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ <span style="box-sizing:border-box;color:rgb(230, 192, 123);">printf</span> <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"&lt;h1&gt;gitexample's HomePage&lt;/h1&gt;It works.\n"</span> &gt; index.html
+</code></pre>
+<ol start="4" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">提交</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git add index.html
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"Homepage test version."</span>
+</code></pre>
+<ol start="5" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">推送到GitHub，完成远程版本库创建。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push origin master
+</code></pre>
+<ol start="6" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">访问网址： <a href="http://gitexample.github.io/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">http://gitexample.github.io/</a> 。</li>
+</ol>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">1.5.2. 创建项目主页</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">如前所述，GitHub会为每个账号分配一个二级域名&lt;user-id&gt;.github.io作为用户的首页地址。实际上还可以为每个项目设置主页，项目主页也通过此二级域名进行访问。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">例如gitexample用户创建的helloworld项目如果启用了项目主页，则可通过网址<a href="http://gitexample.github.io/helloworld/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">http://gitexample.github.io/helloworld/</a>访问。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">为
+项目启用项目主页很简单，只需要在项目版本库中创建一个名为gh-pages的分支，并向其中添加静态网页即可。也就是说如果项目的Git版本库中包含了
+名为gh-pages分支的话，则表明该项目提供静态网页构成的主页，可以通过网址http://&lt;user-id&gt;<a href="http://.github.io/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">.github.io/</a>&lt;project-name&gt;访问到。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">下面以用户gitexample的项目helloworld为例，介绍如何维护项目主页。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">如果本地尚未从GitHub克隆helloworld版本库，执行如下命令。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git clone git@github.<span style="box-sizing:border-box;color:rgb(97, 174, 238);">com:</span>gitexample/helloworld.git
+$ cd helloworld
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">当
+前版本库只有一个名为master的分支，如果直接从master分支创建gh-pages分支操作非常简单，但是作为保存网页的gh-pages分支中
+的内容和master分支中的可能完全不同。如果不希望gh-pages分支继承master分支的历史和文件，即想要创建一个干净的gh-pages分
+支，需要一点小技巧。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">若使用命令行创建干净的gh-pages分支，可以从下面三个方法任选一种。</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">第一种方法用到两个Git底层命令：git write-tree和git commit-tree。步骤如下：</p>
+<ol style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">基于master分支建立分支gh-pages。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git checkout -b gh-pages
+</code></pre>
+<ol start="2" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">删除暂存区文件，即相当于清空暂存区。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ rm .git/index
+</code></pre>
+<ol start="3" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">创建项目首页index.html。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ <span style="box-sizing:border-box;color:rgb(230, 192, 123);">printf</span> <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"hello world.\n"</span> &gt; index.html
+</code></pre>
+<ol start="4" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">添加文件index.html到暂存区。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git add index.html
+</code></pre>
+<ol start="5" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">用Git底层命令创建新的根提交，并将分支gh-pages重置。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git reset --hard $(echo <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"branch gh-pages init."</span> | git commit-tree $(git write-tree))
+</code></pre>
+<ol start="6" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">执行推送命令，在GitHub远程版本库创建分支gh-pages。</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push -u origin gh-pages
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">稍后，用浏览器访问下面的地址即可看到刚刚提交的项目首页： <a href="http://gitexample.github.io/helloworld/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">http://gitexample.github.io/helloworld/</a> 。<br style="box-sizing:border-box;">
+当然，还有其他创建方法，详见：<a href="http://www.worldhello.net/gotgithub/03-project-hosting/050-homepage.html" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">GotGitHub</a></p>
+<h1 style="box-sizing:border-box;font-family:inherit;text-rendering:optimizelegibility;font-size:26px;margin:0px 0px 15px;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);">2. GitBook</h1>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">本文以Ubuntu 14.04.5 LTS为例安装。</p>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">2.1. 安装nodejs</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">首先需要安装 nodejs，以便能够使用 npm 来安装 gitbook。<br style="box-sizing:border-box;">
+从URL: <a href="https://nodejs.org/en/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">https://nodejs.org/en/</a>下载Linux版本的nodejs，我下载的是node-v8.11.4-linux-x64.tar.xz。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ xz -d node-v8.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">11.4</span>-linux-x64.tar.zx
+$ tar xvf node-v8.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">11.4</span>-linux-x64.tar
+$ sudo cp node-v8.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">11.4</span>-linux-x64 /opt/
+$ sudo chmod <span style="box-sizing:border-box;color:rgb(209, 154, 102);">640</span> /etc/sudoers
+$ sudo vi /etc/sudoers
+
+Defaults    secure_path=<span style="box-sizing:border-box;color:rgb(152, 195, 121);">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/node-v8.11.4-linux-x64/bin/"</span>
+
+$ sudo chmod <span style="box-sizing:border-box;color:rgb(209, 154, 102);">440</span> /etc/sudoers
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">重启系统。</p>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">2.2. 安装gitbook</h2>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ sudo npm install -g gitbook-cli
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">2.3. 基本使用</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">gitbook 的基本用法非常简单，基本上就只有两步：</p>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">使用 gitbook init 初始化书籍目录<br style="box-sizing:border-box;">
+使用 gitbook serve 编译书籍<br style="box-sizing:border-box;">
+下面将结合一个非常简单的实例，来介绍 gitbook 的基本用法。</p>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">2.3.1. gitbook init</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">首先，创建如下目录结构：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ tree book/
+book/
+├── README.md
+└── SUMMARY.md
+
+<span style="box-sizing:border-box;color:rgb(209, 154, 102);">0</span> directories, <span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span> files
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">README.md 和 SUMMARY.md 是两个必须文件，README.md 是对书籍的简单介绍：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cat book/README.md 
+
+This is a book powered by [GitBook](<span style="box-sizing:border-box;color:rgb(97, 174, 238);">https:</span>/<span style="box-sizing:border-box;color:rgb(152, 195, 121);">/github.com/</span>GitbookIO/gitbook).
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">SUMMARY.md 是书籍的目录结构。内容如下：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cat book/SUMMARY.md 
+
+* [Chapter1](chapter1/README.md)
+  * [Section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>](chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md)
+  * [Section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>](chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md)
+* [Chapter2](chapter2/README.md)
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">创建了这两个文件后，使用 gitbook init，它会为我们创建 SUMMARY.md 中的目录结构。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cd book
+$ gitbook init
+$ tree
+.
+├── chapter1
+│   ├── README.md
+│   ├── section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md
+│   └── section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md
+├── chapter2
+│   └── README.md
+├── README.md
+└── SUMMARY.md
+
+<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span> directories, <span style="box-sizing:border-box;color:rgb(209, 154, 102);">6</span> files
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">注意：在我的实验中，gitbook init 只支持两级目录！</p>
+<h3 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:22px;">2.3.2. gitbook serve</h3>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">书籍目录结构创建完成以后，就可以使用 gitbook serve 来编译和预览书籍了：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ gitbook serve
+Live reload server started on port: <span style="box-sizing:border-box;color:rgb(209, 154, 102);">35729</span>
+Press CTRL+C to quit ...
+
+info: <span style="box-sizing:border-box;color:rgb(209, 154, 102);">7</span> plugins are installed 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"livereload"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"highlight"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"search"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"lunr"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"sharing"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"fontsettings"</span>... OK 
+info: loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"theme-default"</span>... OK 
+info: found <span style="box-sizing:border-box;color:rgb(209, 154, 102);">5</span> pages 
+info: found <span style="box-sizing:border-box;color:rgb(209, 154, 102);">0</span> asset files 
+info: &gt;&gt; generation finished <span style="box-sizing:border-box;color:rgb(198, 120, 221);">with</span> success <span style="box-sizing:border-box;color:rgb(198, 120, 221);">in</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">1.1</span>s ! 
+
+Starting server ...
+Serving book on http:<span style="box-sizing:border-box;color:rgb(146, 146, 146);font-style:normal;">//localhost:4000</span>
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;"><code style="box-sizing:border-box;color:rgb(199, 37, 78);border-radius:4px;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;border:none;white-space:pre-wrap;vertical-align:middle;font-size:13px;background-color:rgb(246, 246, 246);padding:2px 4px;">gitbook serve</code> 命令实际上会首先调用 <code style="box-sizing:border-box;color:rgb(199, 37, 78);border-radius:4px;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;border:none;white-space:pre-wrap;vertical-align:middle;font-size:13px;background-color:rgb(246, 246, 246);padding:2px 4px;">gitbook build</code> 编译书籍，完成以后会打开一个 web 服务器，监听在本地的 4000 端口。<br style="box-sizing:border-box;">
+现在，可以用浏览器打开 <a href="http://127.0.0.1:4000/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">http://127.0.0.1:4000</a> 查看书籍的效果。<br style="box-sizing:border-box;">
+现在，gitbook 为我们创建了书籍目录结构后，就可以向其中添加真正的内容了，文件的编写使用 markdown 语法，在文件修改过程中，每一次保存文件，<code style="box-sizing:border-box;color:rgb(199, 37, 78);border-radius:4px;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;border:none;white-space:pre-wrap;vertical-align:middle;font-size:13px;background-color:rgb(246, 246, 246);padding:2px 4px;">gitbook serve</code> 都会自动重新编译，所以可以持续通过浏览器来查看最新的书籍效果！<br style="box-sizing:border-box;">
+另外，用户还可以下载 <a href="https://github.com/GitbookIO/editor" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">gitbook 编辑器</a>，做到所见即所得的编辑</p>
+<h1 style="box-sizing:border-box;font-family:inherit;text-rendering:optimizelegibility;font-size:26px;margin:0px 0px 15px;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);">3. GitHub + GitBook管理图书</h1>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">3.1. 书籍内容存储</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">使用github提供的git仓库管理书籍内容，增加、修改书籍内容，提交至git仓库即可。</p>
+<ol style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">github上创建仓库arm-cm4-guide</li>
+<li style="box-sizing:border-box;line-height:30px;">checkout arm-cm4-guide到本地</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git clone git@github.<span style="box-sizing:border-box;color:rgb(97, 174, 238);">com:</span>gitexample/arm-cm4-guide.git arm-cm4-guide
+</code></pre>
+<ol start="3" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">编写书籍内容</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cd arm-cm4-guide/
+$ cat README.md 
+
+ARM Cortex-M3与Cortex-M4权威指南（第三版）
+
+$ cat SUMMARY.md 
+
+* [ARM Cortex-M 处理器简介](chapter1/README.md)
+    * [什么是ARM Cortex-M处理器](chapter1/section1.md)
+        * [Cortex-M处理器家族](chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md)
+        * [处理器和微控制器的区别](chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md)
+    * [ARM Cortex-M处理器的优势](chapter1/section2.md)
+        * [低功耗](chapter2/section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md)
+        * [代码密度](chapter2/section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md)
+$ tree
+.
+├── README.md
+└── SUMMARY.md
+
+<span style="box-sizing:border-box;color:rgb(209, 154, 102);">0</span> directories, <span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span> files
+
+$ gitbook init
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter1/README.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter1/section1.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter1/section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter1/section2.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter2/section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create chapter2/section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> create SUMMARY.md 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> initialization is finished
+
+$ tree
+.
+├── chapter1
+│   ├── README.md
+│   ├── section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md
+│   ├── section1.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md
+│   ├── section1.md
+│   └── section2.md
+├── chapter2
+│   ├── section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">1</span>.md
+│   └── section2.<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span>.md
+├── README.md
+└── SUMMARY.md
+
+<span style="box-sizing:border-box;color:rgb(209, 154, 102);">2</span> directories, <span style="box-sizing:border-box;color:rgb(209, 154, 102);">9</span> files
+</code></pre>
+<ol start="4" style="box-sizing:border-box;padding:0px;margin:-5px 0px 20px 20px;word-break:break-word;">
+<li style="box-sizing:border-box;line-height:30px;">提交到arm-cm4-guide仓库</li>
+</ol>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git add README.md SUMMARY.md chapter1/ chapter2/
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"add book content."</span>
+$ git push origin master
+
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">3.2. 构建书籍</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">首先，使用 gitbook build 将书籍内容输出到默认目录，也就是当前目录下的 _book 目录。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ gitbook build
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">7</span> plugins are installed 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> <span style="box-sizing:border-box;color:rgb(209, 154, 102);">6</span> explicitly listed 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"highlight"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"search"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"lunr"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"sharing"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"fontsettings"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> loading plugin <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"theme-default"</span>... OK 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> found <span style="box-sizing:border-box;color:rgb(209, 154, 102);">8</span> pages 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> found <span style="box-sizing:border-box;color:rgb(209, 154, 102);">0</span> asset files 
+<span style="box-sizing:border-box;color:rgb(97, 174, 238);">info:</span> <span style="box-sizing:border-box;color:rgb(97, 174, 238);">&gt;&gt; </span>generation finished with success in <span style="box-sizing:border-box;color:rgb(209, 154, 102);">1.5</span>s ! 
+
+$ ls _book/
+chapter1  chapter2  gitbook  index.html  search_index.json
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">3.3. 创建 gh-pages 分支</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">将gitbook生成的html page发布github pages上(实际是提交内容到gh-pages 分支)。所以先创建arm-cm4-guide的 gh-pages 分支。</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git checkout -b gh-pages
+$ rm .git/index
+$ git reset --hard $(echo <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"branch gh-pages init."</span> <span style="box-sizing:border-box;">| git commit-tree $(git write-tree))
+$ git push -u origin gh-pages
+</span></code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">现在，目录下应该只剩下 _book 目录了，首先，忽略一些文件：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ echo <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"*~"</span> &gt; .gitignore
+$ echo <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"_book"</span> <span style="box-sizing:border-box;color:rgb(97, 174, 238);">&gt;&gt; </span>.gitignore
+$ git add .gitignore
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"Ignore some files"</span>
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">然后，加入 _book 下的内容到分支中：</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ cp -r _book/* .
+$ git add .
+$ git commit -m <span style="box-sizing:border-box;color:rgb(152, 195, 121);">"Publish book"</span>
+</code></pre>
+<h2 style="box-sizing:border-box;font-family:inherit;margin:0px 0px 15px;text-rendering:optimizelegibility;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);font-size:24px;">3.4. 上传书籍内容到 GitHub</h2>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">现在，可以将编译好的书籍内容上传到 GitHub 中 arm-cm4-guide项目的 gh-pages 分支了.</p>
+<pre style="box-sizing:border-box;margin:0px 0px 10px;line-height:1.42857;border:1px solid rgb(204, 204, 204);font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;overflow-x:auto;background:rgb(40, 44, 52);display:block;color:rgb(171, 178, 191);margin-bottom:20px;white-space:pre;overflow:auto;font-size:13px;overflow-wrap:normal;border-radius:4px;padding:15px;word-break:break-word;"><code style="box-sizing:border-box;font-family:Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace;color:inherit;border-radius:0px;border:none;vertical-align:middle;font-size:13px;background-color:transparent;padding:0px;white-space:pre;">$ git push -u origin gh-pages
+</code></pre>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">访问 <a href="https://gitexample.github.io/arm-cm4-guide/" rel="nofollow" style="box-sizing:border-box;background-color:transparent;text-decoration:none;cursor:pointer;color:rgb(49, 148, 208);" target="_blank">https://gitexample.github.io/arm-cm4-guide/</a> 就可以阅读 arm-cm4-guide这本书了！</p>
+<h1 style="box-sizing:border-box;font-family:inherit;text-rendering:optimizelegibility;font-size:26px;margin:0px 0px 15px;font-weight:700;line-height:1.7;color:rgb(47, 47, 47);">4. 利用 GitHub Pages 快速搭建个人博客</h1>
+<p style="box-sizing:border-box;margin:0px 0px 25px;word-break:break-word;">fork别人的模板（qiubaiying.github.io），rename为自己的仓库名(&lt;user-id&gt;.github.io)。<br style="box-sizing:border-box;">
+把里面的页面内容修改为自己的即可。</p>
+
+          </div>
+        </div>
+    </div>
+
+    
+
+    
+
+    
+      
+        
+
+      
+
+      
+        
+
+    
+
+        
+
+    
+    <div style="box-sizing:border-box;"></div>
+  </div>
+
+  
+</div>
+<div style="box-sizing:border-box;min-height:213px;background-color:rgb(245, 245, 245);padding-top:40px;padding-bottom:40px;">
+  
+  <div style="box-sizing:border-box;"></div>
+  
+    
+    <div style="box-sizing:border-box;margin:0px auto 20px;width:620px;">
+    </div>
+</div>
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+  
+
+</div></div></div>
+</div>
+
+</div></body></html>
